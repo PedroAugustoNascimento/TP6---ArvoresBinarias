@@ -1,9 +1,10 @@
 package src;
-
 public class Main {
     
     public static void main (String []args){
         BinaryTree tree = new BinaryTree();
+        Hash hash = new Hash();
+
 
         Node c1 = new Node(40);
         Node c2 = new Node(20);
@@ -34,12 +35,30 @@ public class Main {
         System.out.println("================================");
         tree.heightTree();
         System.out.println("================================");
-        System.out.println("Metodo remover incorreto");
-        tree.removeEvenNumbers();
+        System.out.println("");
+        tree.preOrder();
+        System.out.println("================================");
+        tree.removePairNumbers();
         System.out.println("================================");
         tree.preOrder();
         System.out.println("================================");
         System.out.println("Inverted tree: ");
         tree.mirroringTree();
+        System.out.println("================================");
+        System.out.println("HashMap: ");
+        hash.getMapValue();
+        System.out.println("================================");
+        System.out.println("HashSet: ");
+        hash.getSetValue();
+        System.out.println("================================");
+        System.out.println("LinkedHashMap: ");
+        hash.getLinkedValue();
+        System.out.println("================================");
+        System.out.println("Hashtable: ");
+        hash.getTableValue();
+       
+
+        
+
     }
 }
