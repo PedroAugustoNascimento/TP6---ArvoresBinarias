@@ -99,7 +99,7 @@ public class BinaryTree {
         if (root == null) {
             return false; // Se a árvore está vazia, retorna falso
         }
-    
+
         // Caso especial: se o nó a ser removido é a raiz
         if (root.getValue() == value) {
             if (root.getLeft() == null && root.getRight() == null) {
@@ -123,13 +123,13 @@ public class BinaryTree {
             }
             return true; // Raiz removida
         }
-    
+
         // Para outros casos, encontramos o pai do nó a ser removido
         Node father = findNode(root, value);
         if (father == null) {
             return false; // O valor não foi encontrado
         }
-    
+
         // Determina o nó filho a ser removido (esquerda ou direita do pai)
         Node son;
         if (father.getValue() < value) {
@@ -137,7 +137,7 @@ public class BinaryTree {
         } else {
             son = father.getLeft();
         }
-    
+
         // Primeiro caso: se o filho não tem filhos (nó folha)
         if (son.getLeft() == null && son.getRight() == null) {
             if (father.getValue() < value) {
@@ -147,7 +147,7 @@ public class BinaryTree {
             }
             return true;
         }
-    
+
         // Segundo caso: se o filho tem apenas um filho
         if (son.getLeft() == null) {
             if (father.getValue() < value) {
@@ -165,7 +165,7 @@ public class BinaryTree {
             }
             return true;
         }
-    
+
         // Terceiro caso: o nó tem dois filhos
         if (son.getLeft() != null && son.getRight() != null) {
             Node fatherRightLeft = farLeftPossible(son, son.getRight());
@@ -184,10 +184,9 @@ public class BinaryTree {
             }
             return true;
         }
-    
+
         return false;
     }
-    
 
     public void removeNum(int value) {
         remove(value);
@@ -281,7 +280,7 @@ public class BinaryTree {
 
     // questão 05) Método que remove todos elementos pares
     private void privRemovePairNumbers(Node current) {
-        if(current != null) {
+        if (current != null) {
             privRemovePairNumbers(current.getLeft());
             privRemovePairNumbers(current.getRight());
             if (current.getValue() % 2 == 0) {
@@ -316,4 +315,84 @@ public class BinaryTree {
     }
 
     // questão 07) Método não-recursivo para encaminhamento da árvore
-}
+    private void privPreOrderStack(Node current) {
+        if (current == null)
+            return;
+
+        Stack stack = new Stack();
+        stack.stack(current);
+
+        while (!stack.empty()) {
+            Node aux = stack.unstack();
+            System.out.println("Element: " + aux.getValue()); //R
+
+            if (aux.getRight() != null)
+                stack.stack(aux.getRight()); //E
+            if (aux.getLeft() != null)
+                stack.stack(aux.getLeft()); //D
+        }
+    }
+
+    public void preOrderStack() {
+        privPreOrderStack(root);
+    }
+
+    //Método para impressão em ordem utilizando pilha
+    private void privOnOrderStack(Node current) {
+        if (current == null)
+            return;
+
+        Stack stack = new Stack();
+        stack.stack(current);
+
+        while (!stack.empty()) {
+            Node aux = stack.unstack();
+
+            if (aux.getLeft() != null)
+                stack.stack(aux.getLeft()); //E
+
+            System.out.println("Element: " + aux.getValue()); //R
+
+            if (aux.getRight() != null)
+                stack.stack(aux.getRight()); //D
+
+        }
+    }
+
+    
+    public void onOrderStack() {
+        privOnOrderStack(root);
+    }
+
+    //Método para impressão em pos ordem utilizando pilha
+    private void privPosOrderStack(Node current) {
+        if (current == null) 
+            return;
+        
+        Stack stack = new Stack();       
+        Stack auxStack = new Stack(); 
+
+        stack.stack(current);    
+
+        while (!stack.empty()) {        
+            Node aux = stack.unstack(); 
+            auxStack.stack(aux);  
+
+            if (aux.getLeft() != null) 
+                stack.stack(aux.getLeft());  //E
+            
+            if (aux.getRight() != null) 
+                stack.stack(aux.getRight()); //D
+            
+        }
+    
+        while (!auxStack.empty()) {
+            Node aux = auxStack.unstack();
+            System.out.println("Element: " + aux.getValue()); //R
+        }
+    }
+
+    public void posOrderStack(){
+        privPosOrderStack(root);
+    }
+    }

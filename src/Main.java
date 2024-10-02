@@ -56,7 +56,12 @@ public class Main {
         System.out.println("================================");
         System.out.println("Hashtable: ");
         hash.getTableValue();
-       
+        System.out.println("================================");
+        tree.posOrderStack();
+        System.out.println("================================");
+        tree.preOrderStack();
+        System.out.println("================================");
+        tree.onOrderStack();
 
         
 
